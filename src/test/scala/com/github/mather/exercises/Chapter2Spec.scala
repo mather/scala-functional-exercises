@@ -20,7 +20,7 @@ class Chapter2Spec extends FlatSpec with Matchers {
 
   // Exercise 2-3
   "curry" should "return curryed function" in {
-    val add = (a:Int, b: Int) => a + b
+    val add = (a: Int, b: Int) => a + b
     val curryedAdd = Chapter2.curry(add)
     curryedAdd(1)(2) should be(3)
   }
@@ -30,5 +30,14 @@ class Chapter2Spec extends FlatSpec with Matchers {
     val add = (a: Int) => (b: Int) => a + b
     val uncurryedAdd = Chapter2.uncurry(add)
     uncurryedAdd(1, 2) should be(3)
+  }
+
+  // Exercise 2-5
+  "compose" should "return composed function" in {
+    val intToDouble = (_: Int).toDouble
+    val doubleToString = (_: Double).toString
+
+    val intToFloatingPointString = Chapter2.compose(doubleToString, intToDouble)
+    intToFloatingPointString(1) should be("1.0")
   }
 }
