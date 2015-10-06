@@ -15,4 +15,11 @@ object Chapter2 {
   }
 
 
+  // Exercise 2-2
+  // isSorted: Check if given array is sorted with given condition.
+  def isSorted[A](as: Array[A], ordered: (A,A) => Boolean): Boolean = {
+    (for ( i <- 0 until (as.length - 1) ) yield (as(i), as(i+1))).
+      forall{ case (a, b) => ordered(a, b) }
+  }
+
 }
