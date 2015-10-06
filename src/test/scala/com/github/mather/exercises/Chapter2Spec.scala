@@ -24,4 +24,11 @@ class Chapter2Spec extends FlatSpec with Matchers {
     val curryedAdd = Chapter2.curry(add)
     curryedAdd(1)(2) should be(3)
   }
+
+  // Exercise 2-4
+  "uncurry" should "return uncurryed function" in {
+    val add = (a: Int) => (b: Int) => a + b
+    val uncurryedAdd = Chapter2.uncurry(add)
+    uncurryedAdd(1, 2) should be(3)
+  }
 }

@@ -25,5 +25,12 @@ object Chapter2 {
 
   // Exercise 2-3
   // curry: return curryed function
-  def curry[A,B,C](f: (A,B) => C): A => (B => C) = (a: A) => f(a, _)
+  def curry[A,B,C](f: (A,B) => C): A => (B => C) =
+    (a: A) => f(a, _)
+
+  // Exercise 2-4
+  // uncurry: return uncurryed function
+  def uncurry[A,B,C](f: A => B => C): (A,B) => C =
+    (a: A, b: B) => f(a)(b)
+
 }
