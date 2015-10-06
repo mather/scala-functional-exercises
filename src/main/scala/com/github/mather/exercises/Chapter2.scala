@@ -22,4 +22,8 @@ object Chapter2 {
       forall{ case (a, b) => ordered(a, b) }
   }
 
+
+  // Exercise 2-3
+  // curry: return curryed function
+  def curry[A,B,C](f: (A,B) => C): A => (B => C) = (a: A) => f(a, _)
 }
