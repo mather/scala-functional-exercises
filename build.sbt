@@ -1,5 +1,7 @@
 name := """scala-functional-exercises"""
 
+organization := "com.github.mather"
+
 version := "1.0"
 
 scalaVersion := "2.11.7"
