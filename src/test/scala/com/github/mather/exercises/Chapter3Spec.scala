@@ -17,4 +17,8 @@ class Chapter3Spec extends FlatSpec with Matchers {
     x should be(3)
   }
 
+  "3-2: tail" should "return list except first element" in {
+    List(1,2,3).tail should be(List(2,3))
+    the [Exception] thrownBy List().tail
+  }
 }

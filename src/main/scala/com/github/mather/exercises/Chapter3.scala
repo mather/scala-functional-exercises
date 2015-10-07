@@ -2,8 +2,15 @@ package com.github.mather.exercises
 
 object Chapter3 {
 
-  sealed trait List[+A]
-  case object Nil extends List[Nothing]
+  sealed trait List[+A] {
+    def tail: List[A]
+  }
+
+  case object Nil extends List[Nothing] {
+    // ひとまず Nil に対する tail は Exception を返すようにする
+    def tail: List[Nothing] = throw new Exception
+  }
+
   case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
   object List {
