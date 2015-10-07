@@ -27,4 +27,9 @@ class Chapter3Spec extends FlatSpec with Matchers {
     List(1,2,3,4,5).drop(3) should be(List(4,5))
     the [Exception] thrownBy List(1,2,3,4,5).drop(6)
   }
+
+  "3-4: dropWhile" should "drop element which satisfy predicate" in {
+    List(1,2,5,4,3).dropWhile(_ < 5) should be(List(5,4,3))
+    List(1,2,5,4,3).dropWhile(_ > 0) should be(Nil)
+  }
 }

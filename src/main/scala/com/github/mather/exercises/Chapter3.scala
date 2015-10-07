@@ -5,6 +5,7 @@ object Chapter3 {
   sealed trait List[+A] {
     def tail: List[A]
     def drop(n: Int): List[A]
+    def dropWhile(pred: A => Boolean): List[A]
   }
 
   case object Nil extends List[Nothing] {
@@ -15,6 +16,7 @@ object Chapter3 {
       case k if k < 0 => throw new IllegalArgumentException
       case k => throw new Exception
     }
+    def dropWhile(pred: Nothing => Boolean): List[Nothing] = Nil
   }
 
   case class Cons[+A](head: A, tail: List[A]) extends List[A] {
@@ -22,6 +24,11 @@ object Chapter3 {
       case 0 => this
       case k if k < 0 => throw new IllegalArgumentException
       case k => tail.drop(k-1)
+    }
+
+    def dropWhile(pred: A => Boolean): List[A] = {
+      if (pred(head)) tail.dropWhile(pred)
+      else this
     }
   }
 
