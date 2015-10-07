@@ -19,6 +19,12 @@ class Chapter3Spec extends FlatSpec with Matchers {
 
   "3-2: tail" should "return list except first element" in {
     List(1,2,3).tail should be(List(2,3))
+    List(1).tail should be(Nil)
     the [Exception] thrownBy List().tail
+  }
+
+  "3-3: drop" should "return dropped list" in {
+    List(1,2,3,4,5).drop(3) should be(List(4,5))
+    the [Exception] thrownBy List(1,2,3,4,5).drop(6)
   }
 }
