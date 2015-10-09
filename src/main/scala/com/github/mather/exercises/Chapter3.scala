@@ -7,6 +7,7 @@ object DataStructure {
    */
   sealed trait List[+A] {
     def tail: List[A]
+    def setHead[B >: A](elem: B): List[B]
     def drop(n: Int): List[A]
     def dropWhile(pred: A => Boolean): List[A]
   }
@@ -16,6 +17,8 @@ object DataStructure {
      * ひとまず Nil に対する tail は Exception を返すようにする
      */
     def tail: List[Nothing] = throw new Exception
+
+    def setHead[B >: Nothing](elem: B): List[B] = Nil
 
     def drop(n: Int): List[Nothing] = n match {
       case 0 => Nil
@@ -28,6 +31,8 @@ object DataStructure {
 
   case class Cons[+A](head: A, tail: List[A]) extends List[A] {
     // tail は実装済み
+
+    def setHead[B >: A](elem: B): List[B] = Cons(elem, tail)
 
     def drop(n: Int): List[A] = n match {
       case 0 => this

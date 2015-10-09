@@ -19,6 +19,9 @@ class Chapter3Spec extends FlatSpec with Matchers {
   }
 
   "3-2: setHead" should "replace first element of List" in {
+    List(1,2,3).setHead(5) should be(List(5,2,3))
+    Nil.setHead(10) should be(Nil)
+
     setHead(Nil, 1) should be(Nil)
     setHead(List(1,2,3), 5) should be(List(5,2,3))
   }
