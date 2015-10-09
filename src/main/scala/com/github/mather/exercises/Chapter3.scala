@@ -1,7 +1,10 @@
 package com.github.mather.exercises
 
-object Chapter3 {
+object DataStructure {
 
+  /**
+   * メソッドによる実装も試みる
+   */
   sealed trait List[+A] {
     def tail: List[A]
     def drop(n: Int): List[A]
@@ -9,17 +12,23 @@ object Chapter3 {
   }
 
   case object Nil extends List[Nothing] {
-    // ひとまず Nil に対する tail は Exception を返すようにする
+    /**
+     * ひとまず Nil に対する tail は Exception を返すようにする
+     */
     def tail: List[Nothing] = throw new Exception
+
     def drop(n: Int): List[Nothing] = n match {
       case 0 => Nil
       case k if k < 0 => throw new IllegalArgumentException
       case k => throw new Exception
     }
+
     def dropWhile(pred: Nothing => Boolean): List[Nothing] = Nil
   }
 
   case class Cons[+A](head: A, tail: List[A]) extends List[A] {
+    // tail は実装済み
+
     def drop(n: Int): List[A] = n match {
       case 0 => this
       case k if k < 0 => throw new IllegalArgumentException
@@ -44,10 +53,26 @@ object Chapter3 {
     }
   }
 
+}
+
+object Chapter3 {
+
+  import DataStructure._
+
+  def setHead[A](l: List[A], elem: A): List[A] = l match {
+    case Nil => Nil
+    case Cons(x, xs) => Cons(elem, xs)
+  }
+
+  def tail[A](l: List[A]): List[A] = l match {
+    case Nil         => Nil // ???
+    case Cons(x, xs) => xs
+  }
+
   def drop[A](l: List[A], n: Int): List[A] = (l, n) match {
-    case (_, k) if k < 0 => throw new IllegalArgumentException
-    case (xs, 0) => xs
-    case (Nil, k) => Nil
+    case (_, k) if k < 0  => throw new IllegalArgumentException
+    case (xs, 0)          => xs
+    case (Nil, k)         => Nil
     case (Cons(x, xs), k) => drop(xs, k-1)
   }
 
